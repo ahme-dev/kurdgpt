@@ -16,6 +16,7 @@
 	},
 	"dependencies": {
 		"node-telegram-bot-api": "^0.61.0",
+		"openai": "^3.2.1",
 		"telegraf": "^4.12.2",
 		"ts-dotenv": "^0.9.1"
 	}
