@@ -1,11 +1,13 @@
 import { load } from "ts-dotenv";
 import { Telegraf } from "telegraf";
 import { Configuration, OpenAIApi } from "openai";
+import { Translate } from "@google-cloud/translate/build/src/v2";
 
 // import env variables
 const env = load({
 	BOT_TOKEN: String,
 	AI_KEY: String,
+	TRANSL_KEY: String,
 });
 
 // connect to openai
@@ -14,6 +16,11 @@ const ai = new OpenAIApi(
 		apiKey: env.AI_KEY,
 	}),
 );
+
+// connect to google translate
+const translate = new Translate({
+	key: env.TRANSL_KEY,
+});
 
 // make the bot
 const bot = new Telegraf(env.BOT_TOKEN);
@@ -29,7 +36,11 @@ bot.on("message", async (ctx) => {
 	// blacklist ids ctx.from.id
 	// or save them to limit their messages
 
-	const aiRes = await ai.createChatCompletion({
+	const messageInEnglish = await translate.translate(ctx.message.text, {
+		to: "en",
+	});
+
+	const aiResponse = await ai.createChatCompletion({
 		model: "gpt-3.5-turbo",
 		messages: [
 			{
@@ -39,7 +50,7 @@ bot.on("message", async (ctx) => {
 			},
 			{
 				role: "user",
-				content: ctx.message.text,
+				content: messageInEnglish[0],
 			},
 		],
 		temperature: 0.2,
@@ -47,9 +58,13 @@ bot.on("message", async (ctx) => {
 		user: ctx.from.id.toString(),
 	});
 
-	const replyMessage = aiRes.data.choices[0]?.message?.content;
+	const replyMessage = aiResponse.data.choices[0]?.message?.content;
 
-	await ctx.reply(replyMessage || "?");
+	if (!replyMessage) return;
+
+	const replyInKurdish = await translate.translate(replyMessage, { to: "ckb" });
+
+	await ctx.reply(replyInKurdish[0]);
 });
 
 // catch all errors
