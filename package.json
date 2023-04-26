@@ -1,0 +1,16 @@
+{
+	"name": "kurdgpt",
+	"version": "0.1.0",
+	"description": "",
+	"scripts": {
+		"run": "tsx watch .",
+		"dev": "tsx watch ."
+	},
+	"keywords": [],
+	"author": "",
+	"license": "GPL-3",
+	"devDependencies": {
+		"@tsconfig/strictest": "^2.0.1",
+		"tsx": "^3.12.6"
+	}
+}
