@@ -3,8 +3,8 @@
 	"version": "0.1.0",
 	"description": "",
 	"scripts": {
-		"run": "tsx watch .",
-		"dev": "tsx watch ."
+		"run": "tsx watch src/main.ts",
+		"dev": "tsx watch src/main.ts"
 	},
 	"keywords": [],
 	"author": "",
