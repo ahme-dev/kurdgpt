@@ -1,16 +1,17 @@
-import { Telegraf } from "telegraf";
+import { Telegraf, session } from "telegraf";
 import { env, loadEnv } from "./env";
-import { logRequests } from "./middleware";
+import { limitRequests, logRequests } from "./middleware";
 import { handleErrors, handleMessage, handleStart } from "./handlers";
+import { ContextExt } from "./types";
 
 // load env variables
 loadEnv();
 
 // make the bot
-const bot = new Telegraf(env.BOT_TOKEN);
+const bot = new Telegraf<ContextExt>(env.BOT_TOKEN);
 
-// add middleware
-bot.use(logRequests);
+bot.use(session({ defaultSession: () => ({ count: 0 }) }));
+bot.use(logRequests, limitRequests);
 
 // add handlers
 bot.start(handleStart);
