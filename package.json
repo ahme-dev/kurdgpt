@@ -11,11 +11,15 @@
 	"license": "GPL-3",
 	"devDependencies": {
 		"@tsconfig/strictest": "^2.0.1",
+		"@types/pg": "^8.6.6",
 		"tsx": "^3.12.6"
 	},
 	"dependencies": {
 		"@google-cloud/translate": "^7.2.1",
+		"@telegraf/session": "^2.0.0-beta.6",
+		"kysely": "^0.23.5",
 		"openai": "^3.2.1",
+		"pg": "^8.10.0",
 		"telegraf": "^4.12.2",
 		"ts-dotenv": "^0.9.1"
 	}

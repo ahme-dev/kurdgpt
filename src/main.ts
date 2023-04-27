@@ -3,6 +3,7 @@ import { env, loadEnv } from "./env";
 import { limitRequests, logRequests } from "./middleware";
 import { handleErrors, handleMessage, handleStart } from "./handlers";
 import { ContextExt } from "./types";
+import { Postgres } from "@telegraf/session/pg";
 
 // load env variables
 loadEnv();
@@ -10,7 +11,26 @@ loadEnv();
 // make the bot
 const bot = new Telegraf<ContextExt>(env.BOT_TOKEN);
 
-bot.use(session({ defaultSession: () => ({ count: 0 }) }));
+// connect db for session
+const store = Postgres<{}>({
+	host: env.DB_URL,
+	user: env.DB_USER,
+	password: env.DB_PASS,
+	database: env.DB_NAME,
+	port: env.DB_PORT,
+	config: {
+		ssl: true,
+	},
+});
+
+bot.use(
+	session({
+		store,
+		defaultSession: () => ({
+			requestCount: 0,
+		}),
+	}),
+);
 bot.use(logRequests, limitRequests);
 
 // add handlers

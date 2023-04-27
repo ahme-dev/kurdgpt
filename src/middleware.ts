@@ -11,10 +11,9 @@ export async function limitRequests(
 	ctx: ContextExt,
 	next: () => Promise<void>,
 ) {
-	ctx.session.count++;
-	console.log("count :: ", ctx.session.count);
+	ctx.session.requestCount++;
 
-	if (ctx.session.count > 1) return await ctx.reply("تەواو برا");
+	if (ctx.session.requestCount > 1) return await ctx.reply("تەواو برا");
 
 	return await next();
 }
