@@ -31,6 +31,14 @@ bot.start((ctx) =>
 	),
 );
 
+bot.use(async (ctx, next) => {
+	console.time(`request :: ${ctx.from?.id}-${ctx.from?.username} ::`);
+	await next(); // runs next middleware
+	// runs after next middleware finishes
+
+	console.timeEnd(`request :: ${ctx.from?.id}-${ctx.from?.username} ::`);
+});
+
 // reply to messages
 bot.on("message", async (ctx) => {
 	// blacklist ids ctx.from.id
@@ -75,3 +83,7 @@ bot.catch(async (err, ctx) => {
 
 // launch the bot
 bot.launch();
+
+// for shutdown
+process.once("SIGINT", () => bot.stop("SIGINT"));
+process.once("SIGTERM", () => bot.stop("SIGTERM"));
