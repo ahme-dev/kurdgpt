@@ -1,13 +1,7 @@
 import { Translate } from "@google-cloud/translate/build/src/v2";
-import { load } from "ts-dotenv";
+import { env, loadEnv } from "./env";
 
-// import env variables
-const env = load({
-	BOT_TOKEN: String,
-	AI_KEY: String,
-	TRANSL_KEY: String,
-	DB_CON: String,
-});
+loadEnv();
 
 // connect to google translate
 const translate = new Translate({

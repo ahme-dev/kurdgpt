@@ -1,13 +1,7 @@
 import { Configuration, OpenAIApi } from "openai";
-import { load } from "ts-dotenv";
+import { env, loadEnv } from "./env";
 
-// import env variables
-const env = load({
-	BOT_TOKEN: String,
-	AI_KEY: String,
-	TRANSL_KEY: String,
-	DB_CON: String,
-});
+loadEnv();
 
 // connect to openai
 const ai = new OpenAIApi(
