@@ -4,6 +4,7 @@ import { limitRequests, logRequests } from "./middleware";
 import { handleErrors, handleMessage, handleStart } from "./handlers";
 import { ContextExt } from "./types";
 import { Postgres } from "@telegraf/session/pg";
+import { getToday } from "./utils";
 
 // load env variables
 loadEnv();
@@ -27,7 +28,9 @@ bot.use(
 	session({
 		store,
 		defaultSession: () => ({
-			requestCount: 0,
+			dailyMessages: 4,
+			messagesLeft: 4,
+			lastDate: getToday(),
 		}),
 	}),
 );
