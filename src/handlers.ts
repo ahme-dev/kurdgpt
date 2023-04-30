@@ -1,14 +1,16 @@
 import { Context } from "telegraf";
 import { translateToEnglish, translateToKurdish } from "./translation";
 import { promptAI } from "./ai";
-import { Update } from "telegraf/typings/core/types/typegram";
+import { Message, Update } from "telegraf/typings/core/types/typegram";
 
 export async function handleMessage(ctx: Context<Update>) {
 	// if there's no message or user, return
 	if (!ctx.from || !ctx.message) return;
 
 	// translate user message to english
-	const messageInEnglish = await translateToEnglish(ctx.message.text);
+	const messageInEnglish = await translateToEnglish(
+		(ctx.message as Message.TextMessage).text,
+	);
 
 	// prompt the ai with the message
 	const replyMessage = await promptAI(
