@@ -26,9 +26,8 @@ export async function handleMessage(ctx: Context<Update>) {
 }
 
 export async function handleStart(ctx: Context<Update>) {
-	await ctx.reply(
-		"بەخێربێیت بۆ بۆتی کورد جی پی تی!\nتکایە ئاگاداربە کە من تەنها یەک نامەی تۆم بیرئەبێ.",
-	);
+	await ctx.reply("بەخێربێیت بۆ بۆتی کورد جی پی تی!");
+	await ctx.reply("تکایە ئاگاداربە کە من تەنها یەک نامەی تۆم بیرئەبێ");
 }
 
 export async function handleErrors(err: unknown, ctx: Context) {
