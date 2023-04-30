@@ -20,8 +20,11 @@ export async function limitRequests(
 		ctx.session.messagesLeft = ctx.session.dailyMessages;
 
 	// if user has no messages left, return
-	if (ctx.session.messagesLeft <= 0)
-		return await ctx.reply("تکایە سبەی نامە بنێرەوە! ٤ نامەی ئەمڕۆت بەکارهێنا");
+	if (ctx.session.messagesLeft <= 0) {
+		return await ctx.reply(
+			"تکایە سبەی نامە بنێرەوە! ٤ نامەی ئەمڕۆت بەکارهێنا.\n\nدەتوانی داواکری و پێشنیارەکانت بنێریت بۆ ئەحمەد",
+		);
+	}
 
 	// decrement messages left
 	ctx.session.messagesLeft -= 1;
