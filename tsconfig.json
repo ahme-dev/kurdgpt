@@ -2,5 +2,7 @@
 	"extends": "@tsconfig/strictest/tsconfig.json",
 	"compilerOptions": {
 		"strictNullChecks": true,
+		"esModuleInterop": true,
+		"outDir": "./dist"
 	}
 }

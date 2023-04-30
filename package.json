@@ -3,7 +3,8 @@
 	"version": "0.1.0",
 	"description": "",
 	"scripts": {
-		"start": "tsx watch src/main.ts",
+		"build": "tsc -p .",
+		"start": "node dist/main.js",
 		"dev": "tsx watch src/main.ts"
 	},
 	"keywords": [],
@@ -12,7 +13,8 @@
 	"devDependencies": {
 		"@tsconfig/strictest": "^2.0.1",
 		"@types/pg": "^8.6.6",
-		"tsx": "^3.12.6"
+		"tsx": "^3.12.6",
+		"typescript": "^5.0.4"
 	},
 	"dependencies": {
 		"@google-cloud/translate": "^7.2.1",
