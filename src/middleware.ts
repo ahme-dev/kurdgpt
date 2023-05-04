@@ -46,9 +46,11 @@ export async function limitRequests(ctx: ContextExt, next: NextFunction) {
 		return;
 	}
 
+	// otherwise
+
 	// decrement messages left
 	ctx.session.messagesLeft -= 1;
 
-	// otherwise allow the user to send a message
+	// allow the user to send a message
 	return await next();
 }

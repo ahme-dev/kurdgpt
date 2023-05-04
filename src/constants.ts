@@ -1,1 +1,3 @@
 export const DAILY_MESSAGE_LIMIT = 3;
+
+export const CONVERSATION_MESSAGES_LIMIT = 7;

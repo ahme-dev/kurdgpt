@@ -10,6 +10,7 @@ export interface SessionData {
 	// the last date the user sent a message
 	lastDate: string;
 	// the messages sent between the user and the bot
+	// for bot to remember the context of the conversation
 	conversation: ChatCompletionRequestMessage[];
 }
 

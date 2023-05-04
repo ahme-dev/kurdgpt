@@ -8,6 +8,7 @@ const translate = new Translate({
 	key: env.TRANSL_KEY,
 });
 
+// translate any language to english or kurdish
 export async function translateText(
 	text: string,
 	language: "en" | "ckb",

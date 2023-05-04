@@ -10,6 +10,8 @@ const ai = new OpenAIApi(
 	}),
 );
 
+// prompt the ai with the previous messages and the current prompt
+// return the ai's reply
 export async function promptAI(
 	previousMessages: ChatCompletionRequestMessage[],
 	promptMessage: string,
@@ -36,13 +38,17 @@ export async function promptAI(
 		],
 		temperature: 0.2,
 		max_tokens: 100,
+		// use the user id as the engine's id
 		user: uid,
 	});
 
+	// get the ai's reply
 	const replyMessage = aiResponse.data.choices[0]?.message?.content;
 
+	// if there's no reply, return with indicative message
 	if (!replyMessage)
-		return "تۆزێک سەرم لێتێکچووە، ببورە\nتکایە کاتێکی تر نامەم بۆ بنێرە";
+		return "لە ئێستادا مێشکم هیچ کارناکات، ببورە نازانم چۆن وەڵامت بەمەوە";
 
+	// otherwise return the reply
 	return replyMessage;
 }

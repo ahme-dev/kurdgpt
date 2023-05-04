@@ -1,6 +1,7 @@
 import { EnvType, load } from "ts-dotenv";
 
 const schema = {
+	// as described in .env.example
 	BOT_TOKEN: String,
 	AI_KEY: String,
 	TRANSL_KEY: String,

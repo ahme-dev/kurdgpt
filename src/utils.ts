@@ -1,11 +1,15 @@
+import { CONVERSATION_MESSAGES_LIMIT } from "./constants";
 import { ContextExt } from "./types";
 
+// get todays date in the format dd/mm/yyyy
 export function getToday(): string {
 	const d = new Date();
 	const dateString = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
 	return dateString;
 }
 
+// add a message to the conversation
+// used with session middleware
 export function addToConversation(
 	ctx: ContextExt,
 	content: string,
@@ -17,6 +21,7 @@ export function addToConversation(
 		content,
 	});
 
-	// if the conversation is too long, remove the last item
-	if (ctx.session.conversation.length >= 7) ctx.session.conversation.shift();
+	// if the conversation longer than the limit, remove the oldest message
+	if (ctx.session.conversation.length >= CONVERSATION_MESSAGES_LIMIT)
+		ctx.session.conversation.shift();
 }
