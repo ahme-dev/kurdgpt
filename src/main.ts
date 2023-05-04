@@ -6,6 +6,8 @@ import { getToday } from "./utils";
 import { Bot, Context, session } from "grammy";
 import { PsqlAdapter } from "@grammyjs/storage-psql";
 import { Client } from "pg";
+import { UserFromGetMe } from "grammy/types";
+import { DAILY_MESSAGE_LIMIT } from "./constants";
 
 // load env variables
 loadEnv();
@@ -14,8 +16,16 @@ async function bootstrap() {
 	// connect the database
 	const client = new Client({
 		connectionString: env.DB_URL,
+		ssl: true,
 	});
-	await client.connect();
+	try {
+		await client.connect();
+	} catch (e: unknown) {
+		console.log(`error connecting to database :: ${JSON.stringify(e)}`);
+		process.exit(1);
+	}
+
+	console.log("database connected :: using", client.database);
 
 	// make the bot
 	const bot = new Bot<ContextExt>(env.BOT_TOKEN);
@@ -23,9 +33,9 @@ async function bootstrap() {
 	bot.use(
 		session({
 			initial: () => ({
-				dailyMessages: 4,
+				dailyMessages: DAILY_MESSAGE_LIMIT,
 				lastDate: getToday(),
-				messagesLeft: 4,
+				messagesLeft: DAILY_MESSAGE_LIMIT,
 			}),
 			getSessionKey: (ctx: Context) => ctx.from?.id.toString(),
 			storage: await PsqlAdapter.create({ tableName: "sessions", client }),
@@ -41,7 +51,8 @@ async function bootstrap() {
 
 	// launch the bot
 	bot.start({
-		onStart: () => console.log("bot started!"),
+		onStart: (info: UserFromGetMe) =>
+			console.log(`bot started :: using ${info.username}`),
 	});
 }
 

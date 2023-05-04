@@ -7,6 +7,9 @@ export async function handleMessage(ctx: ContextExt) {
 	// if there's no message or user, return
 	if (!ctx.from || !ctx.message) return;
 
+	// say typing
+	ctx.replyWithChatAction("typing");
+
 	// translate user message to english
 	const messageInEnglish = await translateToEnglish(ctx.message.text || "");
 
@@ -29,6 +32,6 @@ export async function handleStart(ctx: ContextExt) {
 }
 
 export async function handleErrors(err: BotError) {
-	console.log("error :: ", err.message);
+	console.log("error caught :: ", err.message);
 	await err.ctx.reply("زۆر ببورە! کێشەیەکم بۆ دروستبووە");
 }
