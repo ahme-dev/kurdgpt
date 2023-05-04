@@ -28,9 +28,9 @@ export async function limitRequests(ctx: ContextExt, next: NextFunction) {
 			},
 		);
 		await ctx.reply(
-			"دەتوانی داواکری و پێشنیارەکانت بنێریت" +
+			"دەتوانی سەیرێکی بۆتی تەرجوومەکارمان بکەیت تا ئەوکاتە" +
 				"\n" +
-				"*[@ahmedkabd](https://t.me/ahmedkabd)*",
+				"*[@WordMaster019Bot](https://t.me/WordMaster019Bot)*",
 			{
 				parse_mode: "MarkdownV2",
 				disable_web_page_preview: true,
