@@ -1,0 +1,13 @@
+# fly.toml app configuration file generated for kurdgptbot on 2023-05-04T16:00:31+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "kurdgptbot"
+primary_region = "otp"
+
+[processes]
+  app = "node ./dist/main.js"
+
+[env]
+  NODE_ENV = "producation"

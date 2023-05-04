@@ -16,7 +16,6 @@ async function bootstrap() {
 	// connect the database
 	const client = new Client({
 		connectionString: env.DB_URL,
-		ssl: env.DEVELOPMENT ? true : { rejectUnauthorized: false },
 	});
 	try {
 		await client.connect();

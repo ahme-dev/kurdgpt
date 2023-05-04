@@ -5,7 +5,6 @@ const schema = {
 	AI_KEY: String,
 	TRANSL_KEY: String,
 	DB_URL: String,
-	DEVELOPMENT: Boolean,
 };
 
 type Env = EnvType<typeof schema>;
