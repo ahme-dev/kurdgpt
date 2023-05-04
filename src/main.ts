@@ -16,7 +16,7 @@ loadEnv();
 async function beginBotProcess() {
 	// connect the database
 	const client = new Client({
-		connectionString: env.DATABASE_URL,
+		connectionString: env.DB_URL,
 	});
 
 	// catch database connection errors

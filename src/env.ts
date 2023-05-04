@@ -6,8 +6,7 @@ const schema = {
 	AI_KEY: String,
 	TRANSL_KEY: String,
 	ADMIN_ID: Number,
-	// imported by flyio, not from env file
-	DATABASE_URL: String,
+	DB_URL: String,
 };
 
 type Env = EnvType<typeof schema>;
