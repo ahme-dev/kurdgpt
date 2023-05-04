@@ -1,4 +1,5 @@
 import { Context, SessionFlavor } from "grammy";
+import { ChatCompletionRequestMessage } from "openai";
 
 export interface SessionData {
 	// how many messages can the user send per day
@@ -8,6 +9,8 @@ export interface SessionData {
 	messagesLeft: number;
 	// the last date the user sent a message
 	lastDate: string;
+	// the messages sent between the user and the bot
+	conversation: ChatCompletionRequestMessage[];
 }
 
 export type ContextExt = Context & SessionFlavor<SessionData>;
