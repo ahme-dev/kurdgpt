@@ -1,4 +1,4 @@
-import { translateToEnglish, translateToKurdish } from "./translation";
+import { translateText } from "./translation";
 import { promptAI } from "./ai";
 import { ContextExt } from "./types";
 import { BotError } from "grammy";
@@ -16,7 +16,7 @@ export async function handleMessage(ctx: ContextExt) {
 	ctx.replyWithChatAction("typing");
 
 	// translate user message to english
-	const messageInEnglish = await translateToEnglish(messageText);
+	const messageInEnglish = await translateText(messageText, "en");
 
 	// add user message to previous messages
 	addToConversation(ctx, messageInEnglish, "user");
@@ -32,7 +32,7 @@ export async function handleMessage(ctx: ContextExt) {
 	addToConversation(ctx, replyMessage, "assistant");
 
 	// translate the reply to kurdish
-	const replyInKurdish = await translateToKurdish(replyMessage);
+	const replyInKurdish = await translateText(replyMessage, "ckb");
 
 	// send the reply to the user
 	await ctx.reply(replyInKurdish);

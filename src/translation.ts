@@ -8,17 +8,12 @@ const translate = new Translate({
 	key: env.TRANSL_KEY,
 });
 
-export async function translateToEnglish(text: string): Promise<string> {
+export async function translateText(
+	text: string,
+	language: "en" | "ckb",
+): Promise<string> {
 	const translatedText = await translate.translate(text, {
-		to: "en",
-	});
-
-	return translatedText[0];
-}
-
-export async function translateToKurdish(text: string): Promise<string> {
-	const translatedText = await translate.translate(text, {
-		to: "ckb",
+		to: language,
 	});
 
 	return translatedText[0];
