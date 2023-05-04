@@ -1,7 +1,7 @@
 import { env, loadEnv } from "./env";
 import { limitRequests, logRequests } from "./middleware";
 import { handleErrors, handleMessage, handleStart } from "./handlers";
-import { ContextExt } from "./types";
+import { ContextExt, SessionData } from "./types";
 import { getToday } from "./utils";
 import { Bot, Context, session } from "grammy";
 import { PsqlAdapter } from "@grammyjs/storage-psql";
@@ -31,11 +31,13 @@ async function bootstrap() {
 
 	bot.use(
 		session({
-			initial: () => ({
-				dailyMessages: DAILY_MESSAGE_LIMIT,
-				lastDate: getToday(),
-				messagesLeft: DAILY_MESSAGE_LIMIT,
-			}),
+			initial: () =>
+				({
+					dailyMessages: DAILY_MESSAGE_LIMIT,
+					lastDate: getToday(),
+					messagesLeft: DAILY_MESSAGE_LIMIT,
+					conversation: [],
+				} satisfies SessionData),
 			getSessionKey: (ctx: Context) => ctx.from?.id.toString(),
 			storage: await PsqlAdapter.create({ tableName: "sessions", client }),
 		}),
