@@ -39,7 +39,7 @@ export async function handleMessage(ctx: ContextExt) {
 }
 
 export async function handleStart(ctx: ContextExt) {
-	await ctx.reply("بەخێربێیت، من بۆتی کورد جی پی تیم!");
+	await ctx.reply(`بەخێربێیت، ${ctx.from?.first_name} من بۆتی کورد جی پی تیم!`);
 	await ctx.reply("ئەتوانم وەڵامی هەموو پرسیارەکانت بەمەوە و یارمەتیت بەم");
 	await ctx.reply("تکایە ئاگاداربە کە من کەمێ بیرەوەریم خراپە");
 }
