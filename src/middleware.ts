@@ -1,17 +1,14 @@
-import { Context } from "telegraf";
+import { NextFunction } from "grammy";
 import { ContextExt } from "./types";
 import { getToday } from "./utils";
 
-export async function logRequests(ctx: Context, next: () => Promise<void>) {
+export async function logRequests(ctx: ContextExt, next: NextFunction) {
 	console.time(`request :: ${ctx.from?.id}-${ctx.from?.username} ::`);
 	await next();
 	console.timeEnd(`request :: ${ctx.from?.id}-${ctx.from?.username} ::`);
 }
 
-export async function limitRequests(
-	ctx: ContextExt,
-	next: () => Promise<void>,
-) {
+export async function limitRequests(ctx: ContextExt, next: NextFunction) {
 	// get today's date
 	const todayDate = getToday();
 
