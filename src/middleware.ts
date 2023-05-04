@@ -2,6 +2,7 @@ import { NextFunction } from "grammy";
 import { ContextExt } from "./types";
 import { getToday } from "./utils";
 import { DAILY_MESSAGE_LIMIT } from "./constants";
+import { env } from "./env";
 
 export async function logRequests(ctx: ContextExt, next: NextFunction) {
 	console.time(`request :: ${ctx.from?.id}-${ctx.from?.username} ::`);
@@ -10,6 +11,12 @@ export async function logRequests(ctx: ContextExt, next: NextFunction) {
 }
 
 export async function limitRequests(ctx: ContextExt, next: NextFunction) {
+	// if the message is not from a user, return
+	if (!ctx.from) return;
+
+	// if the user is the admin, allow them to send as many messages as they want
+	if (ctx.from.id === env.ADMIN_ID) return await next();
+
 	// get today's date
 	const todayDate = getToday();
 
