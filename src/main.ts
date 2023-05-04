@@ -15,7 +15,7 @@ loadEnv();
 async function bootstrap() {
 	// connect the database
 	const client = new Client({
-		connectionString: env.DB_URL,
+		connectionString: env.DATABASE_URL,
 	});
 	try {
 		await client.connect();
