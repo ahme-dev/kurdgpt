@@ -16,8 +16,11 @@
 	},
 	"dependencies": {
 		"@google-cloud/translate": "^7.2.1",
+		"@grammyjs/storage-psql": "^2.2.0",
+		"@types/pg": "^8.6.6",
 		"grammy": "^1.16.0",
 		"openai": "^3.2.1",
+		"pg": "^8.10.0",
 		"ts-dotenv": "^0.9.1",
 		"typescript": "^5.0.4"
 	}
