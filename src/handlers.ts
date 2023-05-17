@@ -3,6 +3,7 @@ import { promptAI } from "./ai";
 import { ContextExt } from "./types";
 import { BotError } from "grammy";
 import { addToConversation } from "./utils";
+import { MESSAGES_ERROR_IN_BOT, MESSAGES_WELCOME_USER_LIST } from "./constants";
 
 // handle all messages sent to the bot
 export async function handleMessage(ctx: ContextExt) {
@@ -42,13 +43,16 @@ export async function handleMessage(ctx: ContextExt) {
 // handle the /start command
 // the first message a user sends to the bot
 export async function handleStart(ctx: ContextExt) {
-	await ctx.reply(`بەخێربێیت، ${ctx.from?.first_name} من بۆتی کورد جی پی تیم!`);
-	await ctx.reply("ئەتوانم وەڵامی هەموو پرسیارەکانت بەمەوە و یارمەتیت بەم");
-	await ctx.reply("تکایە ئاگاداربە کە من کەمێ بیرەوەریم خراپە");
+	for (const message of MESSAGES_WELCOME_USER_LIST) {
+		await ctx.reply(message);
+	}
 }
 
 // handle all errors caught by the bot
 export async function handleErrors(err: BotError) {
 	console.log("error caught :: ", err.message);
-	await err.ctx.reply("زۆر ببورە! کێشەیەکم بۆ دروستبووە");
+
+	for (const message of MESSAGES_ERROR_IN_BOT) {
+		await err.ctx.reply(message);
+	}
 }

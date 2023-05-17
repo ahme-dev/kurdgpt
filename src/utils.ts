@@ -1,5 +1,11 @@
-import { CONVERSATION_MESSAGES_LIMIT } from "./constants";
+import {
+	ADMIN_AI_PREVIOUS_MESSAGES_REMEMBERED_LIMIT,
+	USER_AI_PREVIOUS_MESSAGES_REMEMBERED_LIMIT,
+} from "./constants";
+import { env, loadEnv } from "./env";
 import { ContextExt } from "./types";
+
+loadEnv();
 
 // get todays date in the format dd/mm/yyyy
 export function getToday(): string {
@@ -21,7 +27,13 @@ export function addToConversation(
 		content,
 	});
 
+	// get limit based on type of user
+	let messagesLimit =
+		ctx.from?.id == env.ADMIN_ID
+			? ADMIN_AI_PREVIOUS_MESSAGES_REMEMBERED_LIMIT
+			: USER_AI_PREVIOUS_MESSAGES_REMEMBERED_LIMIT;
+
 	// if the conversation longer than the limit, remove the oldest message
-	if (ctx.session.conversation.length >= CONVERSATION_MESSAGES_LIMIT)
+	if (ctx.session.conversation.length >= messagesLimit)
 		ctx.session.conversation.shift();
 }

@@ -1,8 +1,11 @@
 import { NextFunction } from "grammy";
 import { ContextExt } from "./types";
 import { getToday } from "./utils";
-import { DAILY_MESSAGE_LIMIT } from "./constants";
 import { env } from "./env";
+import {
+	MESSAGE_PASSED_DAILY_LIMIT,
+	MESSAGE_PASSED_DAILY_LIMIT_EXTRA,
+} from "./constants";
 
 export async function logRequests(ctx: ContextExt, next: NextFunction) {
 	console.time(`request :: ${ctx.from?.id}-${ctx.from?.username} ::`);
@@ -26,23 +29,15 @@ export async function limitRequests(ctx: ContextExt, next: NextFunction) {
 
 	// if user has no messages left, return
 	if (ctx.session.messagesLeft <= 0) {
-		await ctx.reply(
-			`${DAILY_MESSAGE_LIMIT} نامەی ئەمڕۆت بەکارهێنا` +
-				"\n" +
-				"تکایە سبەی نامە بنێرەوە",
-			{
-				parse_mode: "MarkdownV2",
-			},
-		);
-		await ctx.reply(
-			"دەتوانی سەیرێکی بۆتی تەرجوومەکارمان بکەیت تا ئەوکاتە" +
-				"\n" +
-				"*[@WordMaster019Bot](https://t.me/WordMaster019Bot)*",
-			{
+		await ctx.reply(MESSAGE_PASSED_DAILY_LIMIT, {
+			parse_mode: "MarkdownV2",
+		});
+		if (MESSAGE_PASSED_DAILY_LIMIT_EXTRA.length !== 0) {
+			await ctx.reply(MESSAGE_PASSED_DAILY_LIMIT_EXTRA, {
 				parse_mode: "MarkdownV2",
 				disable_web_page_preview: true,
-			},
-		);
+			});
+		}
 		return;
 	}
 

@@ -7,7 +7,7 @@ import { Bot, Context, session } from "grammy";
 import { PsqlAdapter } from "@grammyjs/storage-psql";
 import { Client } from "pg";
 import { UserFromGetMe } from "grammy/types";
-import { DAILY_MESSAGE_LIMIT } from "./constants";
+import { USER_DAILY_MESSAGE_LIMIT } from "./constants";
 
 // load env variables
 loadEnv();
@@ -38,9 +38,9 @@ async function beginBotProcess() {
 		session({
 			initial: () =>
 				({
-					dailyMessages: DAILY_MESSAGE_LIMIT,
+					dailyMessages: USER_DAILY_MESSAGE_LIMIT,
 					lastDate: getToday(),
-					messagesLeft: DAILY_MESSAGE_LIMIT,
+					messagesLeft: USER_DAILY_MESSAGE_LIMIT,
 					conversation: [],
 				} satisfies SessionData),
 			getSessionKey: (ctx: Context) => ctx.from?.id.toString(),

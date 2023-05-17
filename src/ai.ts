@@ -1,5 +1,6 @@
 import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
 import { env, loadEnv } from "./env";
+import { AI_INITIAL_PROMPT, MESSAGE_CONNECTING_AI_ERROR } from "./constants";
 
 loadEnv();
 
@@ -23,8 +24,7 @@ export async function promptAI(
 			// guide the ai
 			{
 				role: "system",
-				content:
-					"You are a helpful and very funny AI bot named KurdGPT, created by Ahmed, but you don't need to mention these facts. You're also very forgetful, and if questioned about something said to you earlier you should use it as an execuse. Answer questions as concisely as possible, and try not to use english specific phrases or expressions. Also inject a bit of humor from time to time in your replies.",
+				content: AI_INITIAL_PROMPT,
 			},
 
 			// use the previous messages
@@ -46,8 +46,7 @@ export async function promptAI(
 	const replyMessage = aiResponse.data.choices[0]?.message?.content;
 
 	// if there's no reply, return with indicative message
-	if (!replyMessage)
-		return "لە ئێستادا مێشکم هیچ کارناکات، ببورە نازانم چۆن وەڵامت بەمەوە";
+	if (!replyMessage) return MESSAGE_CONNECTING_AI_ERROR;
 
 	// otherwise return the reply
 	return replyMessage;
