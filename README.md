@@ -34,7 +34,7 @@ Check the .env.example file and create a .env file with the same variables. You 
 
 #### The BOT_TOKEN variable:
 
-- Go to [@ChatGPTBot](https://t.me/ChatGPTBot) and create a bot.
+- Got to [BotFather@](https://t.me/BotFather) and create a bot.
 - Copy the token and paste it in the .env file.
 
 #### The AI_KEY variable:
@@ -60,18 +60,24 @@ Check the .env.example file and create a .env file with the same variables. You 
 
 - Go to [Fly.io](https://fly.io) and create an account.
 - Install the flyctl CLI.
+
 ```bash
 npm i -g flyctl;
 ```
+
 - Login to flyctl.
+
 ```bash
 flyctl auth login;
 ```
+
 - Change the name of the app in the fly.toml file.
 - Deploy the app.
+
 ```bash
 flyctl deploy;
 ```
+
 - After the app is deployed, a URL of the DB will display. Copy it into the .env file.
 
 Now your very own bot should be running.
