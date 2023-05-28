@@ -84,4 +84,26 @@ flyctl deploy;
 
 - After the app is deployed, a URL of the DB will display. Copy it into the .env file.
 
-### 🎉 Now your very own bot should be running.
+🎉 Now your very own bot should be running.
+
+<br>
+
+## Change Bot
+
+You can also change the bot for your needs, and place your own limits. 
+
+You only need to change the variables in the `src/constants.ts` file.
+
+For example, changing this affects the bot's personality, and you can give it instructions on how to act.
+```typescript
+export const AI_INITIAL_PROMPT =
+	"You are a helpful and very funny AI bot named KurdGPT, created by Ahmed, but you don't need to mention these facts.
+  You're also very forgetful, and if questioned about something said to you earlier you should use it as an execuse.
+  Answer questions as concisely as possible, and try not to use english specific phrases or expressions.
+  Also inject a bit of humor from time to time in your replies.";
+```
+
+And this changes how many messages a user can send in a day.
+```typescript
+export const USER_DAILY_MESSAGE_LIMIT = 3;
+```
