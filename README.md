@@ -2,6 +2,8 @@
 
 A telegram bot that connects kurdish speaking people to ChatGPT.
 
+![preview](./preview.png)
+
 You can use at [@KurdGPTBot](https://t.me/KurdGPTBot). Due to the limitations of funding, the bot let's you send 3 messages per day. You're however free to host your own bot, using the code in this repo.
 
 You can contribute to the project if you want.
