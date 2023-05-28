@@ -2,7 +2,7 @@
 
 A telegram bot that connects kurdish speaking people to ChatGPT.
 
-You can use at [@KurdGPTBot](https://t.me/KurdGPTBot). Due to the limitations of funding, the bot let's you send 3 messages per day. You're however free to host your own bot, using the code in this repo.
+You can use at [@KurdGPTBot](https://t.me/KurdGPTBot) 🔗 Due to the limitations of funding, the bot let's you send 3 messages per day. You're however free to host your own bot, using the code in this repo.
 
 You can contribute to the project if you want.
 
@@ -74,4 +74,4 @@ flyctl deploy;
 ```
 - After the app is deployed, a URL of the DB will display. Copy it into the .env file.
 
-Now your very own bot should be running.
+### 🎉 Now your very own bot should be running.
