@@ -1,3 +1,5 @@
+### [بە کوردی ئەمە بخوێنەوە](./README-KU.md)
+
 # KurdGPT 🤖🗨
 
 A telegram bot that connects kurdish speaking people to ChatGPT.
@@ -8,7 +10,7 @@ You can use at [@KurdGPTBot](https://t.me/KurdGPTBot) 🔗 Due to the limitation
 
 You can contribute to the project if you want.
 
-#### [بە کوردی ئەمە بخوێنەوە](./README-KU.md)
+<br>
 
 ## Todo
 
