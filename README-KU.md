@@ -117,3 +117,25 @@ flyctl deploy;
 <br>
 
 ### 🎉 ئێستا ئەبێت بۆتەکەت کار بکات
+
+<br>
+
+## گۆڕینی بۆتەکە
+
+ئەشتوانی بۆتەکە بگۆڕی بە پێی پێویستیەکانی خۆت.
+
+تەنها فایلی `src/constants.ts` دەستکاری بکە.
+
+بۆ نموونە ئەگەر بتەوێ کەسایەتی بۆتەکە بگۆڕی و پێی بڵێی چۆن هەڵسوکەوت بکات، لە ڕێی ئەم ڤاریەبڵە ئەکرێ:‌ (تەنها بە ئینگیلی کارەکات)
+```typescript
+export const AI_INITIAL_PROMPT =
+	"You are a helpful and very funny AI bot named KurdGPT, created by Ahmed, but you don't need to mention these facts.
+  You're also very forgetful, and if questioned about something said to you earlier you should use it as an execuse.
+  Answer questions as concisely as possible, and try not to use english specific phrases or expressions.
+  Also inject a bit of humor from time to time in your replies.";
+```
+
+ئەمەشیان سنووری نامەی ڕۆژانەیە بۆ یوسەرەکانی تر (ئاگاداربە ئەگەر یەوسەر بۆتەکەی بەکارهێنابێ و تۆ دواتر ئەمە بگۆڕی ئەوە کاری تێناکا):
+```typescript
+export const USER_DAILY_MESSAGE_LIMIT = 3;
+```
