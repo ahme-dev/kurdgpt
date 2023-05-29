@@ -6,6 +6,7 @@ import {
 	MESSAGE_PASSED_DAILY_LIMIT,
 	MESSAGE_PASSED_DAILY_LIMIT_EXTRA,
 } from "./constants";
+import { tryAsync } from "tryresult";
 
 export async function logRequests(ctx: ContextExt, next: NextFunction) {
 	console.time(`request :: ${ctx.from?.id}-${ctx.from?.username} ::`);
@@ -29,14 +30,18 @@ export async function limitRequests(ctx: ContextExt, next: NextFunction) {
 
 	// if user has no messages left, return
 	if (ctx.session.messagesLeft <= 0) {
-		await ctx.reply(MESSAGE_PASSED_DAILY_LIMIT, {
-			parse_mode: "MarkdownV2",
-		});
-		if (MESSAGE_PASSED_DAILY_LIMIT_EXTRA.length !== 0) {
-			await ctx.reply(MESSAGE_PASSED_DAILY_LIMIT_EXTRA, {
+		await tryAsync(
+			ctx.reply(MESSAGE_PASSED_DAILY_LIMIT, {
 				parse_mode: "MarkdownV2",
-				disable_web_page_preview: true,
-			});
+			}),
+		);
+		if (MESSAGE_PASSED_DAILY_LIMIT_EXTRA.length !== 0) {
+			await tryAsync(
+				ctx.reply(MESSAGE_PASSED_DAILY_LIMIT_EXTRA, {
+					parse_mode: "MarkdownV2",
+					disable_web_page_preview: true,
+				}),
+			);
 		}
 		return;
 	}

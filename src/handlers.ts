@@ -4,6 +4,7 @@ import { ContextExt } from "./types";
 import { BotError } from "grammy";
 import { addToConversation } from "./utils";
 import { MESSAGES_ERROR_IN_BOT, MESSAGES_WELCOME_USER_LIST } from "./constants";
+import { tryAsync } from "tryresult";
 
 // handle all messages sent to the bot
 export async function handleMessage(ctx: ContextExt) {
@@ -15,7 +16,7 @@ export async function handleMessage(ctx: ContextExt) {
 	const messageText = ctx.message.text.trim().slice(0, 100);
 
 	// say typing
-	ctx.replyWithChatAction("typing");
+	await tryAsync(ctx.replyWithChatAction("typing"));
 
 	// translate user message to english
 	const messageInEnglish = await translateText(messageText, "en");
@@ -37,14 +38,14 @@ export async function handleMessage(ctx: ContextExt) {
 	const replyInKurdish = await translateText(replyMessage, "ckb");
 
 	// send the reply to the user
-	await ctx.reply(replyInKurdish);
+	await tryAsync(ctx.reply(replyInKurdish));
 }
 
 // handle the /start command
 // the first message a user sends to the bot
 export async function handleStart(ctx: ContextExt) {
 	for (const message of MESSAGES_WELCOME_USER_LIST) {
-		await ctx.reply(message);
+		await tryAsync(ctx.reply(message));
 	}
 }
 
@@ -53,6 +54,6 @@ export async function handleErrors(err: BotError) {
 	console.log("error caught :: ", err.message);
 
 	for (const message of MESSAGES_ERROR_IN_BOT) {
-		await err.ctx.reply(message);
+		await tryAsync(err.ctx.reply(message));
 	}
 }
